@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Ângulo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Ângulo</h1>
+    <label for="d">Valor d:</label>
+    <input type="number" id="d" step="any">
+
+    <label for="ap">Valor ap:</label>
+    <input type="number" id="ap" step="any">
+
+    <label for="ex">Valor ex:</label>
+    <input type="number" id="ex" step="any">
+
+    <button onclick="calcular()">Calcular Ângulo</button>
+
+    <div id="result" class="result"></div>
+
+    <script>
+        function calcular() {
+            // Obtém os valores dos campos de entrada
+            var d = parseFloat(document.getElementById('d').value);
+            var ap = parseFloat(document.getElementById('ap').value);
+            var ex = parseFloat(document.getElementById('ex').value);
+
+            // Verifica se os valores são válidos
+            if (isNaN(d) || isNaN(ap) || isNaN(ex)) {
+                document.getElementById('result').innerText = 'Por favor, insira valores válidos.';
+                return;
+            }
+
+            // Calcula a tangente
+            var tangente = d / (ex * Math.sqrt(3) / 3 - 0.3 * ap);
+
+            // Calcula o ângulo em radianos
+            var thetaRadianos = Math.atan(tangente);
+
+            // Converte para graus e arredonda
+            var thetaGraus = thetaRadianos * (180 / Math.PI);
+            var thetaArredondado = Math.round(thetaGraus);
+
+            // Exibe o resultado
+            document.getElementById('result').innerText = 'Ângulo de theta = ' + thetaArredondado + 'º';
+        }
+    </script>
+</body>
+</html>
